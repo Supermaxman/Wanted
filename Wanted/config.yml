@@ -1,0 +1,44 @@
+#Variables can be used to replace certain parts of any of the below configurations
+#Simply use %var% where you want the variable value to be replaced
+#  %player% - The name of the player viewing the scoreboard
+#  %online% - The number of players currently on the server
+#  %kills% - The number of kills that player has gotten
+#  %deaths% - The number of times that player has died
+#  %killstreak% - The number of kills that player has gotten since last dying
+#  %money% - The amount of money that player has 
+#  %wanted% - The level of wanted that player has
+#  Sadly, it is currently impossible to set a custom order to the scoreboard in bukkit, so it will sort the scores by size
+
+#Title to show at the top of each player's scoreboard 
+boardTitle: '&6? &cGTA Scoreboard &6?'
+
+#Format of the board, each line on the list is a new line on the board
+boardFormat:
+- '%online%'
+- '%kills%'
+- '%killstreak%'
+- '%wanted%'
+- '%deaths%'
+- '%money%'
+
+#How often (in seconds) should player's have their scoreboard updated?
+updateInterval: 2
+
+#The name to show above the Cop's head when spawned (NONE for no name)
+copName: '&cGTA Cop'
+
+#The speed at which the Cop can walk to/chase targets (speed potion multiplier)
+copSpeed: 5
+
+#The amount of damage the Cop does to targets. 1 = 1 heart
+copDamage: 2
+
+#The time, in seconds, before wanted level starts decreasing
+wantedCooldown: 60
+
+#The armor the Cop should spawn wearing. Values found here: http://jd.bukkit.org/rb/apidocs/org/bukkit/Material.html
+copArmor:
+- LEATHER_HELMET
+- LEATHER_CHESTPLATE
+- LEATHER_LEGGINGS
+- LEATHER_BOOTS
