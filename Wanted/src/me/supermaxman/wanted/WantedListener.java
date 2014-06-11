@@ -49,6 +49,7 @@ public class WantedListener implements Listener {
 				Player killer = entity.getKiller();
 				Wanted.incrementWanted(killer);
 				new Cop(Wanted.plugin).spawn(killer);
+				event.getDrops().clear();
 			}
 		}
 	}
