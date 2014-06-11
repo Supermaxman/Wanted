@@ -10,6 +10,7 @@ import net.milkbowl.vault.economy.Economy;
 
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.PigZombie;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -30,6 +31,7 @@ public class Wanted extends JavaPlugin {
 	public static HashMap<UUID, BukkitTask> wantedTasks = new HashMap<UUID, BukkitTask>();
 	public static HashMap<Stat, HashMap<UUID, Integer>> statMaps = new HashMap<Stat, HashMap<UUID, Integer>>();
 	public static BukkitTask updateTask = null;
+	public static BukkitTask copTask = null;
 	public static Economy economy = null;
 
 	public void onEnable() {
@@ -45,6 +47,7 @@ public class Wanted extends JavaPlugin {
 		log.info(getName() + " has been enabled.");
 		loadStats();
 		runUpdateTask();
+		runCopTask();
 	}
 
 	public void onDisable() {
@@ -149,6 +152,25 @@ public class Wanted extends JavaPlugin {
 		return (economy != null);
 	}
 
+	private void runCopTask(){
+		if (copTask != null) {
+			copTask.cancel();
+		}
+
+		copTask = getServer().getScheduler().runTaskTimer(this, new Runnable(){
+			public void run() {
+				for (Iterator<Cop> it = Cop.cops.iterator(); it.hasNext();) {
+					Cop c = it.next();
+					PigZombie z = c.getEntity();
+					if(z.getTicksLived()>=Wanted.plugin.configuration.COP_TIMER * 20) {
+						it.remove();
+						c.despawn(z);
+					}
+				}
+			}
+		}
+		, 20L, 200L);
+	}
 
 	private void runUpdateTask(){
 		if (updateTask != null) {
@@ -178,7 +200,7 @@ public class Wanted extends JavaPlugin {
 			}else if (fLine.equalsIgnoreCase("%deaths%")) {
 				main.getScore(ChatColor.RED + "Deaths").setScore(getStat(Stat.DEATHS, player));
 			}else if (fLine.equalsIgnoreCase("%killstreak%")) {
-				main.getScore(ChatColor.DARK_PURPLE + "Kill Streak").setScore(getStat(Stat.KILLSTREAKS, player));
+				main.getScore(ChatColor.AQUA + "Kill Streak").setScore(getStat(Stat.KILLSTREAKS, player));
 			}else if (fLine.equalsIgnoreCase("%wanted%")) {
 				main.getScore(ChatColor.DARK_RED + "Wanted").setScore(getStat(Stat.WANTED, player));
 			}else if (fLine.equalsIgnoreCase("%money%")) {

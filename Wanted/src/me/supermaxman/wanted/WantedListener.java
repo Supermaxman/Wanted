@@ -1,5 +1,7 @@
 package me.supermaxman.wanted;
 
+import java.util.Random;
+
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.PigZombie;
 import org.bukkit.entity.Player;
@@ -48,8 +50,13 @@ public class WantedListener implements Listener {
 			if (isCop(entity)) {
 				Player killer = entity.getKiller();
 				Wanted.incrementWanted(killer);
-				new Cop(Wanted.plugin).spawn(killer);
 				event.getDrops().clear();
+				Random r = new Random();
+				int i = r.nextInt(4);
+				while(i>0) {
+					new Cop(Wanted.plugin).spawn(killer);
+					i--;
+				}
 			}
 		}
 	}

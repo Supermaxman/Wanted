@@ -28,10 +28,13 @@ updateInterval: 2
 copName: '&cGTA Cop'
 
 #The speed at which the Cop can walk to/chase targets (speed potion multiplier)
-copSpeed: 5
+copSpeed: 10
 
 #The amount of damage the Cop does to targets. 1 = 1 heart
 copDamage: 2
+
+#The time until a cop is deleted from the map after being spawned in seconds
+copTimer: 30
 
 #The time, in seconds, before wanted level starts decreasing
 wantedCooldown: 60

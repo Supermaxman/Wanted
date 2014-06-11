@@ -21,6 +21,7 @@ public class Configuration
 	public String COP_NAME;
 	public int COP_SPEED;
 	public int COP_DAMAGE;
+	public int COP_TIMER;
 	public int WANTED_COOLDOWN;
 	public ItemStack[] COP_ARMOR;
 
@@ -35,6 +36,7 @@ public class Configuration
 		this.COP_NAME = ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("copName"));
 		this.COP_SPEED = plugin.getConfig().getInt("copSpeed");
 		this.COP_DAMAGE = plugin.getConfig().getInt("copDamage");
+		this.COP_TIMER = plugin.getConfig().getInt("copTimer");
 		this.WANTED_COOLDOWN = plugin.getConfig().getInt("wantedCooldown", 60);
 		ArrayList<ItemStack> copArmor = new ArrayList<ItemStack>();
 		for (String material : plugin.getConfig().getStringList("copArmor"))
